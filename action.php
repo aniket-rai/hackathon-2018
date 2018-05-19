@@ -7,7 +7,7 @@
      fwrite($handle,$content); // Write information to the file
      fclose($handle); // Close the file
      echo "<p>Thank you for submitting. You will now be redirected to the Study Groups Page.</p>";
-     sleep(5)
+     sleep(5);
      header("Location: /study_groups.html");
   }
 ?>
