@@ -62,11 +62,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li class="active"><a href="add_course.html">Add Courses</a></li>
-							<li><a href="study_groups.html">Study Groups</a></li>
-							<li><a href="settings.html">Settings</a></li>
-							<li><a href="calendar.html">Calendar</a></li>
+							<li><a href="../home/index.html">Home</a></li>
+							<li class="active"><a href="../courses/index.html">Add Courses</a></li>
+							<li><a href="../groups/index.html">Study Groups</a></li>
+							<li><a href="../profile/index.html">Profile</a></li>
+							<!-- <li><a href="calendar.html">Calendar</a></li> -->
 						</ul>
 					</div>
 				</div>
@@ -80,7 +80,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="colorlib-navbar-brand">
-							<a class="colorlib-logo" href="index.html">SCA</a>
+							<a class="colorlib-logo" href="../home/index.html">SCA</a>
 						</div>
 						<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 					</div>
@@ -199,7 +199,7 @@
 				text = document.getElementById("subjects").textContent.toLowerCase();
 				alert(text)
 				for(i = 1; i < 6; i++){
-					var element = document.getElementById("c" + i).value.trim().toLowerCase() 
+					var element = document.getElementById("c" + i).value.trim().toLowerCase()
 					var num = element.substring(element.length - 3, element.length)
 					var course = element.substring(0, element.length - 3)
 					if(element == ""){continue}
@@ -207,13 +207,13 @@
 						alert("Course Error at Course " + i)
 						return;
 					}
-					
+
 					if(isNaN(num)){
 						alert("Course Number Error at Course " + i)
 						return;
 					}
-					
-					if(text.indexOf(course) == -1){ 
+
+					if(text.indexOf(course) == -1){
 						alert("Course Name Error at Course " + i)
 						return;
 					}
