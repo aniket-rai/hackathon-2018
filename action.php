@@ -5,5 +5,6 @@
    $content=$_POST['c1'].PHP_EOL.$_POST['c2'].PHP_EOL.$_POST['c3'].PHP_EOL.$_POST['c4'].PHP_EOL.$_POST['c5'];
    fwrite($handle,$content); // Write information to the file
    fclose($handle); // Close the file
+   header("Location: /study_groups.html");
   }
 ?>
