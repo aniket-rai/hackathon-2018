@@ -48,10 +48,11 @@
  <!--[if lt IE 9]>
  <script src="js/respond.min.js"></script>
  <![endif]-->
-
+ <script src="https://apis.google.com/js/platform.js" async defer></script>
+ <meta name="google-signin-client_id" content="517826140473-ccnfs9r349lfoa0i6ipotkn7cb2aa95r.apps.googleusercontent.com">
  </head>
  <body>
-
+<div class="g-signin2" data-onsuccess="onSignIn" align="center" style="display:none"></div>
  <div id="colorlib-page">
     <header>
        <div class="container">
@@ -153,7 +154,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
+    </div>
+    <iframe id="calendar" src="" style="border: 0" width="800" height="600" frameborder="0" scrolling="no" style="display:none"></iframe>
    </div>
 	<!-- <div class="row">
 		<div class="col-md-6">
@@ -209,7 +211,18 @@
 
 <!-- Main JS (Do not remove) -->
 <script src="../js/main.js"></script>
-
+<script>
+  function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+  email = profile.getEmail()
+  document.getElementById("calendar").src = "https://calendar.google.com/calendar/embed?src="+ email.replace("@", "%40") +"&ctz=Pacific%2FAuckland"
+  document.getElementById("calendar").style.display = "block"
+  }
+</script>
 
 
 </html>
