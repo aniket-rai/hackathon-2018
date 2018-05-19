@@ -62,11 +62,10 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li class="active"><a href="add_course.html">Add Courses</a></li>
-							<li><a href="study_groups.html">Study Groups</a></li>
-							<li><a href="settings.html">Settings</a></li>
-							<li><a href="calendar.html">Calendar</a></li>
+							<li><a href="../home/">Home</a></li>
+							<li class="active"><a href="../courses/">Add Courses</a></li>
+							<li><a href="../groups/">Study Groups</a></li>
+							<li><a href="../profile/">Sign Out</a></li>
 						</ul>
 					</div>
 				</div>
@@ -104,7 +103,7 @@
 									 <div class="container-fluid">
 									  <div class="row">
 									   <div class="col-md-6 col-sm-6 col-xs-12">
-									    <form name="webform" method="post" action="action.php">
+									    <form name="webform" method="post" action="../action.php">
 									     <div class="form-group ">
 									      <label class="control-label requiredField" for="c1">
 									       Course 1
@@ -198,7 +197,7 @@
 			$("#subjects").load( "../subjects.txt", function() {
 				text = document.getElementById("subjects").textContent.toLowerCase();
 				for(i = 1; i < 6; i++){
-					var element = document.getElementById("c" + i).value.trim().toLowerCase() 
+					var element = document.getElementById("c" + i).value.trim().toLowerCase()
 					var num = element.substring(element.length - 3, element.length)
 					var course = element.substring(0, element.length - 3)
 					if(element == ""){continue}
@@ -206,13 +205,13 @@
 						alert("Course Error at Course " + i)
 						return;
 					}
-					
+
 					if(isNaN(num)){
 						alert("Course Number Error at Course " + i)
 						return;
 					}
-					
-					if(text.indexOf(course) == -1){ 
+
+					if(text.indexOf(course) == -1){
 						alert("Course Name Error at Course " + i)
 						return;
 					}
