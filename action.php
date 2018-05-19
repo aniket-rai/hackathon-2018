@@ -1,16 +1,9 @@
 <?php
-$file = 'data.txt';
-$email = $_POST['c1'];
-$fp = fopen("data.txt", "a");
-$savestring = $email . "\n";
-fwrite($fp, $savestring);
-fclose($fp);
-echo "<h1>Thank you, we will be in touch as soon as possible!</h1>";
-
-$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
-$txt = "John Doe\n";
-fwrite($myfile, $txt);
-$txt = "Jane Doe\n";
-fwrite($myfile, $txt);
-fclose($myfile);
+  $file = "export/data.txt"; //rename file according to UPI
+  if (isset($_POST['c1']) && isset($_POST['c2']) && isset($_POST['c3']) && isset($_POST['c4']) && isset($_POST['c5'])) {
+  $handle = fopen($file, 'a');
+   $content=$_POST['c1'].PHP_EOL.$_POST['c2'].PHP_EOL.$_POST['c3'].PHP_EOL.$_POST['c4'].PHP_EOL.$_POST['c5'];
+   fwrite($handle,$content); // Write information to the file
+   fclose($handle); // Close the file
+  }
 ?>
