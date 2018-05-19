@@ -331,6 +331,7 @@ header {
 #colorlib-blog,
 #colorlib-contact {
   padding: 10em 0;
+  padding-bottom: 0.5em;
   clear: both;
   position: relative; }
   @media screen and (max-width: 768px) {
@@ -1169,7 +1170,7 @@ input[type="text"] {
     display: block; }
 
 #footer {
-  padding: 8em 0;
+  padding: 0.5em 0;
   display: block;
   width: 100%; }
   #footer h2 {
