@@ -47,7 +47,8 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="517826140473-ccnfs9r349lfoa0i6ipotkn7cb2aa95r.apps.googleusercontent.com">
 	</head>
 	<body>
 
@@ -79,7 +80,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="colorlib-navbar-brand">
-							<a class="colorlib-logo" href="index.html">SCA</a>
+							<a class="colorlib-logo" href="\">SCA</a>
 						</div>
 						<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 					</div>
@@ -103,7 +104,6 @@
 									 <div class="container-fluid">
 									  <div class="row">
 									   <div class="col-md-6 col-sm-6 col-xs-12">
-									    <form name="webform" method="post" action="../action.php">
 									     <div class="form-group ">
 									      <label class="control-label requiredField" for="c1">
 									       Course 1
@@ -136,20 +136,32 @@
 										 </div>
 									     <div class="form-group">
 									      <div>
-									       <button style="display: none" name="submit" type="submit" id="form-button">
-									        Hidden
-									       </button>
+											<button class="btn btn-default outline" id="save-button" onclick="saveCourses()">
+												Save
+											</button>
 									      </div>
 									     </div>
-										</form>
-										<button class="btn btn-default outline" id="save-button">
-									        Save
-									    </button>
 									   </div>
 									  </div>
 									 </div>
 								 </div>
 								</div>
+								<div class="g-signin2" data-onsuccess="onSignIn" align="center" style="display:none"></div>
+								<script>
+										function onSignIn(googleUser) {
+											var profile = googleUser.getBasicProfile();
+											console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+											console.log('Name: ' + profile.getName());
+											console.log('Image URL: ' + profile.getImageUrl());
+											console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+											localStorage.currentUser = profile.getEmail();
+											courses = localStorage.getItem(localStorage.getItem("currentUser")).split(",")
+											if (courses == null){return;}
+											for(var i = 0; i < courses.length; i++){
+												document.getElementById("c" + (i+1)).value = courses[i].toUpperCase()
+											}
+										}
+								</script>
 							</div>
 
 		<footer>
@@ -181,17 +193,19 @@
 
 	<!-- Main JS (Do not remove) -->
 	<script src="../js/main.js"></script>
-
-	<script>
+<script>
 	$(document).ready(function() {
+		localStorage.currentUser = ""
 		$(window).keydown(function(event){
 			if(event.keyCode == 13) {
 			event.preventDefault();
 			return false;
 			}
 		});
-
-		$( "#save-button" ).click(function() {
+	});
+	</script>
+	<script>
+		function saveCourses() {
 			var submit = true;
 			var text = ""
 			$("#subjects").load( "../subjects.txt", function() {
@@ -205,22 +219,31 @@
 						alert("Course Error at Course " + i)
 						return;
 					}
-
+	
 					if(isNaN(num)){
 						alert("Course Number Error at Course " + i)
 						return;
 					}
-
+	
 					if(text.indexOf(course) == -1){
 						alert("Course Name Error at Course " + i)
 						return;
 					}
 				}
-				$("#form-button").click()
-				return;
+				if(localStorage.getItem("currentUser") == ""){
+					return
+				}
+				user = localStorage.getItem("currentUser")
+				localStorage
+				c1 = document.getElementById("c1").value.trim().toUpperCase()
+				c2 = document.getElementById("c2").value.trim().toUpperCase()
+				c3 = document.getElementById("c3").value.trim().toUpperCase()
+				c4 = document.getElementById("c4").value.trim().toUpperCase()
+				c5 = document.getElementById("c5").value.trim().toUpperCase()
+				localStorage.setItem(user, [c1, c2, c3, c4, c5])
+				window.location.href = "/home"
 			});
-		});
-	});
+		}
 	</script>
 
 	</body>
