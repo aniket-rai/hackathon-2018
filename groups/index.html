@@ -49,8 +49,10 @@
 	<![endif]-->
 
 	</head>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+ 	<meta name="google-signin-client_id" content="517826140473-ccnfs9r349lfoa0i6ipotkn7cb2aa95r.apps.googleusercontent.com">
 	<body>
-
+	<div class="g-signin2" data-onsuccess="onSignIn" align="center" style="display:none"></div>
 	<nav id="colorlib-main-nav" role="navigation">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle active"><i></i></a>
 		<div class="js-fullheight colorlib-table">
@@ -106,9 +108,9 @@
 							</a>
 							<div class="desc">
 								<span class="meta">Date to Meet</span>
-								<h2><a href="blog.html">Course Code / Name</a></h2>
-								<p>Location: </p>
-								<p>Time: </p>
+								<h2 id="course1"><a href="blog.html">Course Code / Name</a></h2>
+								<p>Location: UoA</p>
+								<p id="time1">Time: </p>
 							</div>
 						</div>
 					</div>
@@ -123,9 +125,9 @@
 							</a>
 							<div class="desc">
 								<span class="meta">Date to Meet</span>
-								<h2><a href="blog.html">Course Code / Name</a></h2>
-								<p>Location: </p>
-								<p>Time: </p>
+								<h2 id="course2"><a href="blog.html">Course Code / Name</a></h2>
+								<p>Location: UoA</p>
+								<p id="time2">Time: </p>
 							</div>
 						</div>
 					</div>
@@ -141,9 +143,9 @@
 							</a>
 							<div class="desc">
 								<span class="meta">Date to Meet</span>
-								<h2><a href="blog.html">Course Code / Name</a></h2>
-								<p>Location: </p>
-								<p>Time: </p>
+								<h2 id="course3"><a href="blog.html">Course Code / Name</a></h2>
+								<p>Location: UoA</p>
+								<p id="time3">Time: </p>
 							</div>
 						</div>
 					</div>
@@ -161,9 +163,9 @@
 							</a>
 							<div class="desc">
 								<span class="meta">Date to Meet</span>
-								<h2><a href="blog.html">Course Code / Name</a></h2>
-								<p>Location: </p>
-								<p>Time: </p>
+								<h2 id="course4"><a href="blog.html">Course Code / Name</a></h2>
+								<p>Location: UoA</p>
+								<p id="time4">Time: </p>
 							</div>
 						</div>
 					</div>
@@ -178,9 +180,9 @@
 							</a>
 							<div class="desc">
 								<span class="meta">Date to Meet</span>
-								<h2><a href="blog.html">Course Code / Name</a></h2>
-								<p>Location: </p>
-								<p>Time: </p>
+								<h2 id="course5"><a href="blog.html">Course Code / Name</a></h2>
+								<p>Location: UoA</p>
+								<p id="time5">Time: Unavailable</p>
 							</div>
 						</div>
 					</div>
@@ -195,9 +197,9 @@
 							</a>
 							<div class="desc">
 								<span class="meta">Date to Meet</span>
-								<h2><a href="blog.html">Course Code / Name</a></h2>
-								<p>Location: </p>
-								<p>Time: </p>
+								<h2 id="course6"><a href="blog.html">Locked</a></h2>
+								<p>Location: N/A</p>
+								<p id="time3">Time: Unavailable</p>
 							</div>
 						</div>
 					</div>
@@ -237,10 +239,32 @@
 	<script src="../js/main.js"></script>
 	<script>
 		function acceptGroup(element){
+			if(element.textContent.indexOf("Locked") != -1){return}
 			element.style.display = "none"
 		}
 
 	</script>
-
+	<script>
+			function onSignIn(googleUser) {
+				var profile = googleUser.getBasicProfile();
+				console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+				console.log('Name: ' + profile.getName());
+				console.log('Image URL: ' + profile.getImageUrl());
+				console.log('Email: ' + profile.getEmail());
+				email = profile.getEmail()
+				localStorage.currentUser = profile.getEmail();
+				courses = localStorage.getItem(localStorage.getItem("currentUser")).split(",")
+				if (courses == null){return;}
+				for(var i = 0; i < courses.length; i++){
+					if(courses[i].split("//")[0].toUpperCase() == ""){
+						document.getElementById("course" + (i+1)).innerHTML = "<a href=\"blog.html\">Locked</a>";
+						document.getElementById("time" + (i+1)).textContent = "Unavailable";
+						continue;
+					}
+					document.getElementById("course" + (i+1)).innerHTML= "<a href=\"blog.html\">" + courses[i].split("//")[0].toUpperCase() + "</a>"
+				}
+			}
+			
+		  </script>
 	</body>
 </html>
