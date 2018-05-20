@@ -47,6 +47,40 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+
+	<style>
+	/* The slider itself */
+	.slider {
+		-webkit-appearance: none;
+		width: 100%;
+		height: 15px;
+		border-radius: 5px;
+		background: #d3d3d3;
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+	}
+
+	.slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		background: #4CAF50;
+		cursor: pointer;
+	}
+
+	.slider::-moz-range-thumb {
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		background: #4CAF50;
+		cursor: pointer;
+}
+	</style>
+
 	</head>
 	<body>
 
@@ -78,7 +112,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="colorlib-navbar-brand">
-							<a class="colorlib-logo" href="\">SCA</a>
+							<a class="colorlib-logo" href="index.html">SCA</a>
 						</div>
 						<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 					</div>
@@ -102,69 +136,94 @@
 									 <div class="container-fluid">
 									  <div class="row">
 									   <div class="col-md-6 col-sm-6 col-xs-12">
+									    <form name="webform" method="post" action="../action.php">
 									     <div class="form-group ">
 									      <label class="control-label requiredField" for="c1">
 									       Course 1
 									      </label>
 									      <input class="form-control" id="c1" name="c1" type="text"/>
-
+										  &nbsp;
+										  <div class="slidecontainer">
+											  <p>Choose your confidence level with the slider:</p>
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+										  </div>
 									     </div>
 									     <div class="form-group ">
 									      <label class="control-label " for="c2">
 									       Course 2
 									      </label>
 									      <input class="form-control" id="c2" name="c2" type="text"/>
+										  &nbsp;
 
+										  <div class="slidecontainer">
+											  <p>Choose your confidence level with the slider:</p>
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+										  </div>
 									     </div>
 									     <div class="form-group ">
 									      <label class="control-label " for="c3">
 									       Course 3
 									      </label>
 									      <input class="form-control" id="c3" name="c3" type="text"/>
+										  &nbsp;
 
+										  <div class="slidecontainer">
+											  <p>Choose your confidence level with the slider:</p>
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+										  </div>
 									     </div>
 									     <div class="form-group ">
 									      <label class="control-label " for="c4">
 									       Course 4
 									      </label>
 									      <input class="form-control" id="c4" name="c4" type="text"/>
+										  &nbsp;
 
+										  <div class="slidecontainer">
+											  <p>Choose your confidence level with the slider:</p>
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+										  </div>
 									     </div>
 									     <div class="form-group ">
 									      <label class="control-label " for="c5">
 									       Course 5
 									      </label>
 									      <input class="form-control" id="c5" name="c5" type="text"/>
+										  &nbsp;
 
+										  <div class="slidecontainer">
+											  <p>Choose your confidence level with the slider:</p>
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+										  </div>
 										 </div>
+
+										 <script>
+											var slider = document.getElementById("myRange");
+											var output = document.getElementById("demo");
+											output.innerHTML = slider.value;
+
+											slider.oninput = function() {
+											  output.innerHTML = this.value;
+											}
+										 </script>
+
+
 									     <div class="form-group">
 									      <div>
-											<button class="btn btn-default outline" id="save-button" onclick="saveCourses()">
-												Save
-											</button>
+									       <button style="display: none" name="submit" type="submit" id="form-button">
+									        Hidden
+									       </button>
 									      </div>
 									     </div>
+										</form>
+										<button class="btn btn-default outline" id="save-button">
+									        Save
+									    </button>
 									   </div>
 									  </div>
 									 </div>
 								 </div>
 								</div>
-								<div class="g-signin2" data-onsuccess="onSignIn" align="center" style="display:none"></div>
-								<script>
-										function onSignIn(googleUser) {
-											var profile = googleUser.getBasicProfile();
-											console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-											console.log('Name: ' + profile.getName());
-											console.log('Image URL: ' + profile.getImageUrl());
-											console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-											localStorage.currentUser = profile.getEmail();
-											courses = localStorage.getItem(localStorage.getItem("currentUser")).split(",")
-											if (courses == null){return;}
-											for(var i = 0; i < courses.length; i++){
-												document.getElementById("c" + (i+1)).value = courses[i].toUpperCase()
-											}
-										}
-								</script>
 							</div>
 
 		<footer>
@@ -196,19 +255,17 @@
 
 	<!-- Main JS (Do not remove) -->
 	<script src="../js/main.js"></script>
-<script>
+
+	<script>
 	$(document).ready(function() {
-		localStorage.currentUser = ""
 		$(window).keydown(function(event){
 			if(event.keyCode == 13) {
 			event.preventDefault();
 			return false;
 			}
 		});
-	});
-	</script>
-	<script>
-		function saveCourses() {
+
+		$( "#save-button" ).click(function() {
 			var submit = true;
 			var text = ""
 			$("#subjects").load( "../subjects.txt", function() {
@@ -233,20 +290,11 @@
 						return;
 					}
 				}
-				if(localStorage.getItem("currentUser") == ""){
-					return
-				}
-				user = localStorage.getItem("currentUser")
-				localStorage
-				c1 = document.getElementById("c1").value.trim().toUpperCase()
-				c2 = document.getElementById("c2").value.trim().toUpperCase()
-				c3 = document.getElementById("c3").value.trim().toUpperCase()
-				c4 = document.getElementById("c4").value.trim().toUpperCase()
-				c5 = document.getElementById("c5").value.trim().toUpperCase()
-				localStorage.setItem(user, [c1, c2, c3, c4, c5])
-				window.location.href = "/home"
+				$("#form-button").click()
+				return;
 			});
-		}
+		});
+	});
 	</script>
 
 	</body>
