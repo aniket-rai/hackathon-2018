@@ -61,7 +61,6 @@
 		-webkit-transition: .2s;
 		transition: opacity .2s;
 	}
-
 	.slider::-webkit-slider-thumb {
 		-webkit-appearance: none;
 		appearance: none;
@@ -71,7 +70,6 @@
 		background: #4CAF50;
 		cursor: pointer;
 	}
-
 	.slider::-moz-range-thumb {
 		width: 25px;
 		height: 25px;
@@ -80,7 +78,8 @@
 		cursor: pointer;
 }
 	</style>
-
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="517826140473-ccnfs9r349lfoa0i6ipotkn7cb2aa95r.apps.googleusercontent.com">
 	</head>
 	<body>
 
@@ -136,7 +135,6 @@
 									 <div class="container-fluid">
 									  <div class="row">
 									   <div class="col-md-6 col-sm-6 col-xs-12">
-									    <form name="webform" method="post" action="../action.php">
 									     <div class="form-group ">
 									      <label class="control-label requiredField" for="c1">
 									       Course 1
@@ -145,7 +143,7 @@
 										  &nbsp;
 										  <div class="slidecontainer">
 											  <p>Choose your confidence level with the slider:</p>
-											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange1">
 										  </div>
 									     </div>
 									     <div class="form-group ">
@@ -157,7 +155,7 @@
 
 										  <div class="slidecontainer">
 											  <p>Choose your confidence level with the slider:</p>
-											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange2">
 										  </div>
 									     </div>
 									     <div class="form-group ">
@@ -169,7 +167,7 @@
 
 										  <div class="slidecontainer">
 											  <p>Choose your confidence level with the slider:</p>
-											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange3">
 										  </div>
 									     </div>
 									     <div class="form-group ">
@@ -181,7 +179,7 @@
 
 										  <div class="slidecontainer">
 											  <p>Choose your confidence level with the slider:</p>
-											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange4">
 										  </div>
 									     </div>
 									     <div class="form-group ">
@@ -193,37 +191,39 @@
 
 										  <div class="slidecontainer">
 											  <p>Choose your confidence level with the slider:</p>
-											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+											  <input type="range" min="1" max="10" value="5" class="slider" id="myRange5">
 										  </div>
 										 </div>
 
-										 <script>
-											var slider = document.getElementById("myRange");
-											var output = document.getElementById("demo");
-											output.innerHTML = slider.value;
-
-											slider.oninput = function() {
-											  output.innerHTML = this.value;
-											}
-										 </script>
-
-
 									     <div class="form-group">
 									      <div>
-									       <button style="display: none" name="submit" type="submit" id="form-button">
-									        Hidden
-									       </button>
+											<button class="btn btn-default outline" id="save-button" onclick="saveCourses()">
+													Save
+											</button>
 									      </div>
 									     </div>
-										</form>
-										<button class="btn btn-default outline" id="save-button">
-									        Save
-									    </button>
 									   </div>
 									  </div>
 									 </div>
 								 </div>
 								</div>
+								<div class="g-signin2" data-onsuccess="onSignIn" align="center" style="display:none"></div>
+								<script>
+										function onSignIn(googleUser) {
+											var profile = googleUser.getBasicProfile();
+											console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+											console.log('Name: ' + profile.getName());
+											console.log('Image URL: ' + profile.getImageUrl());
+											console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+											localStorage.currentUser = profile.getEmail();
+											courses = localStorage.getItem(localStorage.getItem("currentUser")).split(",")
+											if (courses == null){return;}
+											for(var i = 0; i < courses.length; i++){
+												document.getElementById("c" + (i+1)).value = courses[i].split("//")[0].toUpperCase()
+												document.getElementById("myRange" + (i+1)).value = courses[i].split("//")[1].trim()
+											}
+										}
+								</script>
 							</div>
 
 		<footer>
@@ -257,45 +257,58 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-	$(document).ready(function() {
-		$(window).keydown(function(event){
-			if(event.keyCode == 13) {
-			event.preventDefault();
-			return false;
-			}
-		});
-
-		$( "#save-button" ).click(function() {
-			var submit = true;
-			var text = ""
-			$("#subjects").load( "../subjects.txt", function() {
-				text = document.getElementById("subjects").textContent.toLowerCase();
-				for(i = 1; i < 6; i++){
-					var element = document.getElementById("c" + i).value.trim().toLowerCase()
-					var num = element.substring(element.length - 3, element.length)
-					var course = element.substring(0, element.length - 3)
-					if(element == ""){continue}
-					if(element.length < 4){
-						alert("Course Error at Course " + i)
-						return;
+			$(document).ready(function() {
+				localStorage.currentUser = ""
+				$(window).keydown(function(event){
+					if(event.keyCode == 13) {
+					event.preventDefault();
+					return false;
 					}
-
-					if(isNaN(num)){
-						alert("Course Number Error at Course " + i)
-						return;
-					}
-
-					if(text.indexOf(course) == -1){
-						alert("Course Name Error at Course " + i)
-						return;
-					}
-				}
-				$("#form-button").click()
-				return;
+				});
 			});
-		});
-	});
 	</script>
+	<script>
+			function saveCourses() {
+				var submit = true;
+				var text = ""
+				$("#subjects").load( "../subjects.txt", function() {
+					text = document.getElementById("subjects").textContent.toLowerCase();
+					for(i = 1; i < 6; i++){
+						var element = document.getElementById("c" + i).value.trim().toLowerCase()
+						var num = element.substring(element.length - 3, element.length)
+						var course = element.substring(0, element.length - 3)
+						if(element == ""){continue}
+						if(element.length < 4){
+							alert("Course Error at Course " + i)
+							return;
+						}
+		
+						if(isNaN(num)){
+							alert("Course Number Error at Course " + i)
+							return;
+						}
+		
+						if(text.indexOf(course) == -1){
+							alert("Course Name Error at Course " + i)
+							return;
+						}
+					}
+					if(localStorage.getItem("currentUser") == ""){
+						return
+					}
+					user = localStorage.getItem("currentUser")
+					localStorage
+					c1 = document.getElementById("c1").value.trim().toUpperCase() + "//" + document.getElementById("myRange1").value
+					c2 = document.getElementById("c2").value.trim().toUpperCase() + "//" + document.getElementById("myRange2").value
+					c3 = document.getElementById("c3").value.trim().toUpperCase() + "//" + document.getElementById("myRange3").value
+					c4 = document.getElementById("c4").value.trim().toUpperCase() + "//" + document.getElementById("myRange4").value
+					c5 = document.getElementById("c5").value.trim().toUpperCase() + "//" + document.getElementById("myRange5").value
+					localStorage.setItem(user, [c1, c2, c3, c4, c5])
+					alert(localStorage.getItem(user))
+					window.location.href = "/home"
+				});
+			}
+		</script>
 
 	</body>
 </html>
