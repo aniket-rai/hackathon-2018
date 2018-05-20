@@ -102,11 +102,8 @@
 									<div class="about-desc">
 										<div class="row row-pb-md">
                                  <div class="col-md-12 col-md-offset-0 animate-box intro-heading">
-											     <h2 class="about-head">PROFILE</h2>
-												  <span class="title">You will find your information here!</span>
-
-
-												<h3>COURSES</h3>
+											     <h2 class="about-head">John Doe</h2>
+												  <span class="title">email123@aucklanduni.ac.nz</span>
 												<p>Course 1&ensp;•&ensp;Course 2&ensp;•&ensp;Course 3&ensp;•&ensp;Course 4&ensp;•&ensp;Course 5</p>
 											<!--<div class="col-md-4">
 												<h3>EMAIL</h3>
@@ -142,12 +139,15 @@
                                     }
                                     </style>
     									      <a href='../courses/index.html' class='btn'>Add / Change Courses</a>
-    									      </div>
+
+                                    </div>
     									     </div>
+                                   <!-- Calendar Here -->
+                                  <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=arai759%40aucklanduni.ac.nz&amp;color=%231B887A&amp;ctz=Pacific%2FAuckland" style="border-width:0" width="470" height="343" frameborder="0" scrolling="no" style="display:none"></iframe>
+
 											</div>
+   									</div>
 										</div>
-                              <!-- Calendar Here -->
-									</div>
 								</div>
 							</div>
 						</div>
@@ -155,7 +155,6 @@
 				</div>
 			</div>
     </div>
-    <iframe id="calendar" src="" style="border: 0" width="800" height="600" frameborder="0" scrolling="no" style="display:none"></iframe>
    </div>
 	<!-- <div class="row">
 		<div class="col-md-6">
@@ -219,7 +218,12 @@
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
   email = profile.getEmail()
-  document.getElementById("calendar").src = "https://calendar.google.com/calendar/embed?src="+ email.replace("@", "%40") +"&ctz=Pacific%2FAuckland"
+
+  //"https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=arai759%40aucklanduni.ac.nz&amp;color=%231B887A&amp;ctz=Pacific%2FAuckland"
+
+
+  //document.getElementById("calendar").src = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src="+ email.replace("@", "%40") +"&amp;color=%2329527A&amp;src=en.new_zealand%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=Pacific%2FAuckland"
+  document.getElementById("calendar").src = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src="+ email.replace("@", "%40") +"&amp;color=%231B887A&amp;ctz=Pacific%2FAuckland"
   document.getElementById("calendar").style.display = "block"
   }
 </script>
