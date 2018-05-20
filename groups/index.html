@@ -81,9 +81,9 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="colorlib-navbar-brand">
-							<a class="colorlib-logo" href="index.html">SCA</a>
+							<a class="colorlib-logo" href="..\">SCA</a>
 						</div>
-						<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+						<a class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 					</div>
 				</div>
 			</div>
@@ -95,9 +95,9 @@
 					<h2 class="bold">Study Groups</h2>
 				</div>
 				<div class="row row-pb-md">
-					<div class="col-md-4">
+					<div class="col-md-4"  onclick="acceptGroup(this)">
 						<div class="article animate-box">
-							<a href="#" class="blog-img" onclick="acceptGroup()">
+							<a class="blog-img">
 								<img class="img-responsive" src="../images/img-1.jpg" alt="html5 bootstrap by colorlib.com">
 								<div class="overlay"></div>
 								<div class="link">
@@ -112,9 +112,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4"  onclick="acceptGroup(this)">
 						<div class="article animate-box">
-							<a href="#" class="blog-img" onclick="acceptGroup()">
+							<a class="blog-img">
 								<img class="img-responsive" src="../images/img-4.jpg" alt="html5 bootstrap by colorlib.com">
 								<div class="overlay"></div>
 								<div class="link">
@@ -130,9 +130,9 @@
 						</div>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-4"  onclick="acceptGroup(this)">
 						<div class="article animate-box">
-							<a href="#" class="blog-img" onclick="acceptGroup()">
+							<a class="blog-img">
 								<img class="img-responsive" src="../images/img-3.jpg" alt="html5 bootstrap by colorlib.com">
 								<div class="overlay"></div>
 								<div class="link">
@@ -150,9 +150,9 @@
 				</div>
 
 				<div class="row row-pb-md">
-					<div class="col-md-4">
+						<div class="col-md-4"  onclick="acceptGroup(this)">
 						<div class="article animate-box">
-							<a href="#" class="blog-img" onclick="acceptGroup()">
+							<a class="blog-img">
 								<img class="img-responsive" src="../images/img-2.jpg" alt="html5 bootstrap by colorlib.com">
 								<div class="overlay"></div>
 								<div class="link">
@@ -167,9 +167,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4"  onclick="acceptGroup(this)">
 						<div class="article animate-box">
-							<a href="#" class="blog-img" onclick="acceptGroup()">
+							<a class="blog-img">
 								<img class="img-responsive" src="../images/img-5.jpg" alt="html5 bootstrap by colorlib.com">
 								<div class="overlay"></div>
 								<div class="link">
@@ -184,9 +184,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4"  onclick="acceptGroup(this)">
 						<div class="article animate-box">
-							<a href="#" class="blog-img" onclick="acceptGroup()">
+							<a class="blog-img">
 								<img class="img-responsive" src="../images/img-6.jpg" alt="html5 bootstrap by colorlib.com">
 								<div class="overlay"></div>
 								<div class="link">
@@ -235,6 +235,12 @@
 
 	<!-- Main JS (Do not remove) -->
 	<script src="../js/main.js"></script>
+	<script>
+		function acceptGroup(element){
+			element.style.display = "none"
+		}
+
+	</script>
 
 	</body>
 </html>
