@@ -103,9 +103,9 @@
 									<div class="about-desc">
 										<div class="row row-pb-md">
                                  <div class="col-md-12 col-md-offset-0 animate-box intro-heading">
-											     <h2 class="about-head">John Doe</h2>
-												  <span class="title">email123@aucklanduni.ac.nz</span>
-												<p>Course 1&ensp;•&ensp;Course 2&ensp;•&ensp;Course 3&ensp;•&ensp;Course 4&ensp;•&ensp;Course 5</p>
+											     <h2 class="about-head" id="name">Loading</h2>
+												  <span class="title" id="email">email123@aucklanduni.ac.nz</span>
+												<p id="courselist">Course 1&ensp;•&ensp;Course 2&ensp;•&ensp;Course 3&ensp;•&ensp;Course 4&ensp;•&ensp;Course 5</p>
 											<!--<div class="col-md-4">
 
 											     <h2 class="about-head">PROFILE</h2>
@@ -229,12 +229,23 @@
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
   email = profile.getEmail()
-
+  document.getElementById("name").textContent = profile.getName()
+  document.getElementById("email").textContent = profile.getEmail()
+  localStorage.currentUser = profile.getEmail();
+    courses = localStorage.getItem(localStorage.getItem("currentUser")).split(",")
+    if (courses == null){return;}
+    "Course 1&ensp;•&ensp;Course 2&ensp;•&ensp;Course 3&ensp;•&ensp;Course 4&ensp;•&ensp;Course 5"
+    var courselist = courses[0].split("//")[0].toUpperCase()
+    for(var i = 1; i < courses.length; i++){
+      if(courses[i].split("//")[0].toUpperCase() == ""){continue}
+      courselist += "&ensp;•&ensp;" + courses[i].split("//")[0].toUpperCase()
+    }
+    document.getElementById("courselist").innerHTML = courselist;
   //"https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=arai759%40aucklanduni.ac.nz&amp;color=%231B887A&amp;ctz=Pacific%2FAuckland"
 
 
   //document.getElementById("calendar").src = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src="+ email.replace("@", "%40") +"&amp;color=%2329527A&amp;src=en.new_zealand%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=Pacific%2FAuckland"
-  document.getElementById("calendar").src = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src="+ email.replace("@", "%40") +"&amp;color=%231B887A&amp;ctz=Pacific%2FAuckland"
+  //document.getElementById("calendar").src = "https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src="+ email.replace("@", "%40") +"&amp;color=%231B887A&amp;ctz=Pacific%2FAuckland"
   document.getElementById("calendar").style.display = "block"
   }
 </script>
